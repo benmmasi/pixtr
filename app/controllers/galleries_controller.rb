@@ -10,9 +10,9 @@ class GalleriesController < ApplicationController
   end
 
   def create 
-    Gallery.create(gallery_params)
+    gallery = Gallery.create(gallery_params)
 
-    redirect_to "/"
+    redirect_to gallery_path(gallery)
   end
 
 
@@ -31,7 +31,7 @@ class GalleriesController < ApplicationController
     redirect_to "/"
   end
 
-  def destroy
+  def destroy 
     gallery = Gallery.find(params[:id])
     gallery.destroy
 
