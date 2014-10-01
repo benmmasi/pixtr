@@ -1,3 +1,10 @@
 <h1>This is a page for <%= @gallery.name %></h2>
 
+<ul>
+  <% @gallery.images.each do |image| %>
+    <li><%= image_tag image.url %>
+      <%= link_to image.name, gallery_image_path(@gallery, image) %>
+        <% end %>
+    </li>
+</ul>
 <a href="/galleries/<%= @gallery.id %>/edit">Edit</a>

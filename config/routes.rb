@@ -2,8 +2,10 @@ Rails.application.routes.draw do
 
   root "galleries#index"
 
-  resources :galleries
-  
+  resources :galleries do
+    resources :images, only: [:show, :new, :create]
+  end
+   
  # get "/" => "galleries#index"
  # get "/galleries/new" => "galleries#new"
  # post "/galleries" => "galleries#create"
