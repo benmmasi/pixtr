@@ -1,35 +1,36 @@
 class GalleriesController < ApplicationController
+  before_action :require_login
+
   def index
-    @galleries = Gallery.all
+    @galleries = current_user.galleries.all
     render :index
   end
 
   def new
-    @gallery = Gallery.new
+    @gallery = current_user.galleries.new
     render :new
   end
 
   def create 
-    @gallery = Gallery.new(gallery_params)
+    @gallery = current_user.galleries.new(gallery_params)
 
     if @gallery.save
       redirect_to gallery_path(@gallery)
     else
-      #redirect_to new_gallery_path
       render :new
     end
   end
 
   def show
-    @gallery = Gallery.find(params[:id])
+    @gallery = load_gallery_from_url
   end
 
   def edit
-    @gallery = Gallery.find(params[:id])
+    @gallery = load_gallery_from_url
   end
 
   def update
-    @gallery = Gallery.find(params[:id])
+    @gallery = load_gallery_from_url
 
     if @gallery.update(gallery_params)
       redirect_to gallery_path(@gallery)
@@ -48,6 +49,12 @@ class GalleriesController < ApplicationController
 
   def gallery_params
     params.require(:gallery).permit(:name, :description)
+  end
+
+  private
+
+  def load_gallery_from_url
+    current_user.galleries.find(params[:id])
   end
 end
 

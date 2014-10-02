@@ -14,11 +14,15 @@
   .session {
     float: right;
   }
+
+  img {
+    max-height: 25%;
+    max-width: 25%;
+  }
   </style>
 </head>
 <body>
   <header class="session">
-    <%= link_to "Sign up", new_user_path %>
 
     <% if signed_in? %>
             <%= link_to "Sign out", session_path, method: :delete %>
@@ -29,6 +33,11 @@
   </header>
 
   <h1><%= link_to "Pixtr", root_path %></h1>
+  <% flash.each do |name, msg| %>
+     <% if msg.is_a?(String) %>
+       <%= content_tag :div, msg, :class => "flash_#{name}" %>
+     <% end %>
+   <% end %>
 
   <%= yield %>
 
