@@ -4,4 +4,26 @@
   <%= link_to "Edit Image", edit_gallery_image_path(@gallery, @image) %>
 </div>
 
+<%= form_for [@image, @comment] do |form| %>
+<div>
+  <%= form.label :body %>
+  <%= form.text_area :body %>
+</div>
+
+<div>
+  <ul>
+    <% @image.comments.each do |comment| %>
+      <li><%= comment.user.email %> - <%= comment.body %></li>
+    </ul>
+  <% end %>
+</div>
+
+
+<%= render "error_messages", target: @comment %>
+
+<div>
+  <%= form.submit %>
+</div>
+<% end %>
+
 <%= image_tag @image.url %>
