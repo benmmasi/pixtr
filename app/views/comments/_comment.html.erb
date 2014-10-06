@@ -1,9 +1,4 @@
-<div>
-  <ul>
-    <% @comments.each do |comment| %>
+
       <li>
       <strong><%= comment.user.email %></strong> - <em><%= comment.body %></em> (<%= time_ago_in_words comment.created_at %> ago)
       </li>
-    <% end %>
-    </ul>
-  </div>
