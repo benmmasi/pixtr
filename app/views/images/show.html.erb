@@ -11,13 +11,10 @@
 </div>
 
 <div>
-  <ul>
-    <% @image.comments.each do |comment| %>
-      <li><%= comment.user.email %> - <%= comment.body %></li>
-    </ul>
-  <% end %>
-</div>
-
+    <% @comments.each do |comment| %>
+      <% render "comments/comment", comment: comment %>
+    <% end %>
+  </div>
 
 <%= render "error_messages", target: @comment %>
 
