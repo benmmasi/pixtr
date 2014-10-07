@@ -2,7 +2,7 @@ class GalleriesController < ApplicationController
   before_action :require_login
 
   def index
-    @galleries = current_user.galleries.all
+    @galleries = Gallery.all 
     render :index
   end
 
@@ -22,7 +22,7 @@ class GalleriesController < ApplicationController
   end
 
   def show
-    @gallery = load_gallery_from_url
+    @gallery = Gallery.find(params[:id]) 
   end
 
   def edit

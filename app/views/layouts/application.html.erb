@@ -29,10 +29,15 @@
         <% else %>
             <%= link_to "Sign in", new_session_path %>
           <%= link_to "Sign up", new_user_path %>
+
+            <%= link_to "Groups", groups_path %>
         <% end %>
   </header>
 
   <h1><%= link_to "Pixtr", root_path %></h1>
+   
+  <%= link_to "Groups", groups_path %>
+
   <% flash.each do |name, msg| %>
      <% if msg.is_a?(String) %>
        <%= content_tag :div, msg, :class => "flash_#{name}" %>
