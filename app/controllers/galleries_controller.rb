@@ -54,7 +54,7 @@ class GalleriesController < ApplicationController
   private
 
   def load_gallery_from_url
-    current_user.galleries.find(params[:id])
+    Gallery.find(params[:id])
   end
 end
 

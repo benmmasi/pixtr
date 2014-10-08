@@ -10,11 +10,6 @@
   <%= form.text_area :body %>
 </div>
 
-<div>
-    <% @comments.recent.word.each do |comment| %>
-      <%= render "comments/comment", comment: comment %>
-    <% end %>
-  </div>
 
 <%= render "error_messages", target: @comment %>
 
@@ -22,5 +17,17 @@
   <%= form.submit %>
 </div>
 <% end %>
+
+<% if !current_user.likes?(@image) %>
+  <%= button_to "Like this image", image_like_path(@image) %>
+<% else %>
+  <%= button_to "Unlike this image", image_like_path(@image), method: :delete %>
+<% end %>
+
+<div>
+    <% @comments.recent.word.each do |comment| %>
+      <%= render "comments/comment", comment: comment %>
+    <% end %>
+  </div>
 
 <%= image_tag @image.url %>
