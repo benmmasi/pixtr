@@ -18,10 +18,10 @@
 </div>
 <% end %>
 
-<% if !current_user.likes?(@image) %>
-  <%= button_to "Like this image", image_like_path(@image) %>
-<% else %>
+<% if current_user.likes?(@image) %>
   <%= button_to "Unlike this image", image_like_path(@image), method: :delete %>
+<% else %>
+  <%= button_to "Like this image", image_like_path(@image) %>
 <% end %>
 
 <div>
