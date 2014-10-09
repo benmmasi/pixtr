@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :likes
   has_many :images, through: :likes
+  has_many :liked_images, through: :likes, source: :image
   #has_many :liked_images, through: :image, source: :image
 
   validates :email, presence: true, uniqueness: true

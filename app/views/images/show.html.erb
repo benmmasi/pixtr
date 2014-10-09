@@ -1,15 +1,14 @@
-<h2> Hello, you are viewing <%= @image.name %></h2>
+<h2> You are viewing <%= @image.name %></h2>
 
 <div>
   <%= link_to "Edit Image", edit_gallery_image_path(@gallery, @image) %>
 </div>
 
 <%= form_for [@image, @comment] do |form| %>
-<div>
+  <div>
   <%= form.label :body %>
   <%= form.text_area :body %>
 </div>
-
 
 <%= render "error_messages", target: @comment %>
 
@@ -24,10 +23,35 @@
   <%= button_to "Like this image", image_like_path(@image) %>
 <% end %>
 
+<div>This image has<strong> <%= pluralize @image_like_count, "like" %> </strong></div>
+
 <div>
-    <% @comments.recent.word.each do |comment| %>
-      <%= render "comments/comment", comment: comment %>
-    <% end %>
-  </div>
+  <%= form_for [@gallery, @image] do |form| %>
+    <%= form.collection_check_boxes(:group_ids, Group.all, :id, :name) %>
+  <%= form.submit"Add to groups" %>
+<% end %>
+</div>
+
+<ul>
+  <% @image_likes.each do |like| %>
+    <li><%= like.user.email %></li>
+<% end %>
+</ul>
+
+<p><%= @number_of_tags %></p>
+
+<div>
+  <%= form_for [@image.gallery, @image ] do |form| %>
+    <%= form.text_field :tag_words %>
+  <%= form.submit "Update Tags" %>
+<% end %>
+</div>
+
+
+<div>
+  <% @comments.recent.word.each do |comment| %>
+    <%= render "comments/comment", comment: comment %>
+<% end %>
+</div>
 
 <%= image_tag @image.url %>

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   root "galleries#index"
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :index, :show]
 
   resources :comments, only: [:create]
 
@@ -13,12 +13,14 @@ Rails.application.routes.draw do
 
   resources :images, only: [] do
     resources :comments, only: [:create]
-    resource :like, only: [:create, :destroy]
+    resource :like, only: [:create, :destroy, :edit, :update]
   end
 
   resources :groups, only: [:index, :new, :create, :show] do
     resources :group_memberships, only: [:create, :destroy]
   end
+
+  resources :tags, only: [:index, :create, :show]
    
  # get "/" => "galleries#index"
  # get "/galleries/new" => "galleries#new"
